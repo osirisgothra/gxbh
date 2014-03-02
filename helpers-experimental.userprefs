@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" lang="en"?> <!-- not sure but i think VS and MONODEV leave it out, but its more official this way -->
+<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="nxman/MainWindow.cs">
+    <Files>
+      <File FileName="gxed/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="nxman/MainWindow.cs" Line="62" Column="13" />
+      <File FileName="gxlcommon/gxbase.cs" Line="165" Column="4" />
+      <File FileName="gxfileman/MainWindow.cs" Line="13" Column="20" />
+    </Files>
+    <Pads>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="ConnectionManagerPad">
+        <State selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+		<BreakpointStore>
+			<!-- automatic modification to strip user dirs (now relative to curdir) -->
+      <Breakpoint file="gxlcommon/gxbase.cs" line="35" />
+      <Breakpoint file="gxfileman/MainWindow.cs" line="13" />
+      <Breakpoint file="nxman/MainWindow.cs" line="63" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

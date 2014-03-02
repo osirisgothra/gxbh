@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010 <- for those who use it | NOTE: created by hand for MonoDevelop :) |
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxlget", "gxlget\gxlget.csproj", "{01BE3E04-CD7B-4942-8E56-1CA6EE0FEC8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxparse", "gxparse\gxparse\gxparse.csproj", "{5DF177D1-0B17-4EF1-91A6-84C67A8852D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxechohelper", "gxechohelper\gxechohelper.csproj", "{4A61328F-F0F0-45CF-BF0E-60F24499CA87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nxman", "nxman\nxman.csproj", "{96B6C4C6-2FF3-400A-BBF0-47EA74892D66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxlcommon", "gxlcommon\gxlcommon.csproj", "{E694D929-75E4-4548-9A61-B6B1259D45FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxed", "gxed\gxed.csproj", "{B5F4D0D3-1EBB-4526-955F-056B23B46E3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gxfileman", "gxfileman\gxfileman.csproj", "{36399B7A-4FAD-4CC4-9979-4400996AEC85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01BE3E04-CD7B-4942-8E56-1CA6EE0FEC8E}.Debug|x86.ActiveCfg = Debug|x86
+		{01BE3E04-CD7B-4942-8E56-1CA6EE0FEC8E}.Debug|x86.Build.0 = Debug|x86
+		{01BE3E04-CD7B-4942-8E56-1CA6EE0FEC8E}.Release|x86.ActiveCfg = Release|x86
+		{01BE3E04-CD7B-4942-8E56-1CA6EE0FEC8E}.Release|x86.Build.0 = Release|x86
+		{36399B7A-4FAD-4CC4-9979-4400996AEC85}.Debug|x86.ActiveCfg = Debug|x86
+		{36399B7A-4FAD-4CC4-9979-4400996AEC85}.Debug|x86.Build.0 = Debug|x86
+		{36399B7A-4FAD-4CC4-9979-4400996AEC85}.Release|x86.ActiveCfg = Release|x86
+		{36399B7A-4FAD-4CC4-9979-4400996AEC85}.Release|x86.Build.0 = Release|x86
+		{4A61328F-F0F0-45CF-BF0E-60F24499CA87}.Debug|x86.ActiveCfg = Debug|x86
+		{4A61328F-F0F0-45CF-BF0E-60F24499CA87}.Debug|x86.Build.0 = Debug|x86
+		{4A61328F-F0F0-45CF-BF0E-60F24499CA87}.Release|x86.ActiveCfg = Release|x86
+		{4A61328F-F0F0-45CF-BF0E-60F24499CA87}.Release|x86.Build.0 = Release|x86
+		{5DF177D1-0B17-4EF1-91A6-84C67A8852D5}.Debug|x86.ActiveCfg = Debug|x86
+		{5DF177D1-0B17-4EF1-91A6-84C67A8852D5}.Debug|x86.Build.0 = Debug|x86
+		{5DF177D1-0B17-4EF1-91A6-84C67A8852D5}.Release|x86.ActiveCfg = Release|x86
+		{5DF177D1-0B17-4EF1-91A6-84C67A8852D5}.Release|x86.Build.0 = Release|x86
+		{96B6C4C6-2FF3-400A-BBF0-47EA74892D66}.Debug|x86.ActiveCfg = Debug|x86
+		{96B6C4C6-2FF3-400A-BBF0-47EA74892D66}.Debug|x86.Build.0 = Debug|x86
+		{96B6C4C6-2FF3-400A-BBF0-47EA74892D66}.Release|x86.ActiveCfg = Release|x86
+		{96B6C4C6-2FF3-400A-BBF0-47EA74892D66}.Release|x86.Build.0 = Release|x86
+		{B5F4D0D3-1EBB-4526-955F-056B23B46E3B}.Debug|x86.ActiveCfg = Debug|x86
+		{B5F4D0D3-1EBB-4526-955F-056B23B46E3B}.Debug|x86.Build.0 = Debug|x86
+		{B5F4D0D3-1EBB-4526-955F-056B23B46E3B}.Release|x86.ActiveCfg = Release|x86
+		{B5F4D0D3-1EBB-4526-955F-056B23B46E3B}.Release|x86.Build.0 = Release|x86
+		{E694D929-75E4-4548-9A61-B6B1259D45FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E694D929-75E4-4548-9A61-B6B1259D45FA}.Debug|x86.Build.0 = Debug|Any CPU
+		{E694D929-75E4-4548-9A61-B6B1259D45FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{E694D929-75E4-4548-9A61-B6B1259D45FA}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = nxman\nxman.csproj
+	EndGlobalSection
+EndGlobal

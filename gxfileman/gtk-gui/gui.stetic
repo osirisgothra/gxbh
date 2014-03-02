@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.12</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../bin/Debug/gxfileman.exe" internal="true" />
+  </import>
+  <widget class="Gtk.Window" id="MainWindow" design-size="651 550">
+    <action-group name="Default">
+      <action id="executeAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-execute</property>
+      </action>
+      <action id="cutAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-cut</property>
+      </action>
+      <action id="copyAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-copy</property>
+      </action>
+      <action id="pasteAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-paste</property>
+      </action>
+      <action id="refreshAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-refresh</property>
+      </action>
+      <action id="gotoTopAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-goto-top</property>
+      </action>
+      <action id="gotoFirstAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-goto-first</property>
+      </action>
+      <action id="gotoLastAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-goto-last</property>
+      </action>
+      <action id="FileAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">File</property>
+        <property name="ShortLabel" translatable="yes">File</property>
+      </action>
+      <action id="Action">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+      </action>
+    </action-group>
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">MainWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <widget class="Gtk.VBox" id="vbox1">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.MenuBar" id="menubar_main">
+            <property name="MemberName" />
+            <node name="menubar_main" type="Menubar">
+              <node type="Menu" action="FileAction" />
+              <node type="Menu" action="Action" />
+            </node>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Toolbar" id="toolbar_main">
+            <property name="MemberName" />
+            <property name="ShowArrow">False</property>
+            <node name="toolbar_main" type="Toolbar">
+              <node type="Toolitem" action="executeAction" />
+              <node type="Toolitem" action="cutAction" />
+              <node type="Toolitem" action="copyAction" />
+              <node type="Toolitem" action="pasteAction" />
+              <node type="Toolitem" action="refreshAction" />
+              <node type="Toolitem" action="gotoTopAction" />
+              <node type="Toolitem" action="gotoFirstAction" />
+              <node type="Toolitem" action="gotoLastAction" />
+            </node>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.HBox" id="hbox3">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.FileChooserWidget" id="filechooserwidget1">
+                <property name="MemberName" />
+                <property name="LocalOnly">False</property>
+                <property name="SelectMultiple">True</property>
+                <signal name="SelectionChanged" handler="OnFilechooserwidget1SelectionChanged" />
+                <signal name="FileActivated" handler="OnFilechooserwidget1FileActivated" />
+                <signal name="UpdatePreview" handler="OnFilechooserwidget1UpdatePreview" />
+                <signal name="CurrentFolderChanged" handler="OnFilechooserwidget1CurrentFolderChanged" />
+                <signal name="ConfirmOverwrite" handler="OnFilechooserwidget1ConfirmOverwrite" />
+              </widget>
+              <packing>
+                <property name="PackType">End</property>
+                <property name="Position">0</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Statusbar" id="mainstatus">
+            <property name="MemberName" />
+            <property name="Spacing">2</property>
+            <property name="BorderWidth">2</property>
+            <child>
+              <widget class="Gtk.ComboBoxEntry" id="dirnambox">
+                <property name="MemberName" />
+                <property name="IsTextCombo">True</property>
+                <property name="Items" translatable="yes" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.ComboBoxEntry" id="filefilterbox">
+                <property name="MemberName" />
+                <property name="IsTextCombo">True</property>
+                <property name="Items" translatable="yes" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">3</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>

@@ -1,0 +1,27 @@
+How To Compile The Experimental Tools
+/usr/local/gxbase/helpers-experimental/README-compiling 
+
+Quick Instructions
+
+Ensure you have the [Dependencies] needed (see "Dependencies" below) 
+Load ./helpers-experimental.sln with Visual Studio 2010+ or MonoDevelop 3.2.2+
+Set your shadow build location(s)
+Select your configuration: select Debug(developers) or Release(users)
+CTRL+B (MonoDevelop, QtC Compatible mode) or F8 (VS NET, VS Classic Compatible) or select
+Main Menu->Build->Build All and the project should be built.
+
+Dependencies
+
+* all default mono 2 libraries; plus webkit, gtk+, gdk, and glade bindings   
+* microsoft library bindings; mscorlib, winforms
+* qt libraries: libqt4, libqt5, kdelibs, libqxt, zlib
+* paradisim widgets (libparadisimwidgets) 
+* if you use qtCreator/Designer you will need to add these libraries to the configuration
+
+Future Dependencies
+
+* possibly the boost libraries will be needed in later development
+
+See doxygen documentation for further details.
+or email: osirisgothra@hotmail.com
+          gabriel@paradisim.twilightparadox.com

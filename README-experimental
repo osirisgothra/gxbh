@@ -1,0 +1,27 @@
+gxbase/helpers-experimental directory README
+
+2013
+----
+These are some of the experimental binary 'helpers' i've been working on that may be later incorporated
+into the gxbase shell environment. Since they are experimental, some may not work yet or ever. They may
+also be supersceded elsewhere. However, they are still here until I think they are totally never going to
+contribute to the project. At which time, I will delete them from the source tree. Just a warning for those
+who may depend on it if such a thing were to happen. I'll of course not delete them from previous versions
+they were in, seperation of version and content, you know. If they do work, they may not be entirely bug free
+and may be entirely feature-free (-less) at this time. Empty source (zero or few bytes) marks a placeholder
+for startup stuff kind of like brainstorming only in such a way to save data not having to draw a picture or
+even have much file content. If you have questions, you can contact me of course via email <osirisgothra@hotmail.com>
+
+New versions of gxbase are always available from git://gitorious.org/gxbase/gxbase.git and you can refresh
+the tree using a simple 'git clone' with the address above. My website (formerly paradisim.tk, but taken from
+me by corporate liars*) is now at it's permanant home, http://paradisim.twilightparadox.net, which is the
+Paradisim (LLC) Twilight Paradox Homepage. *=those guys who lend 'free for life domains' and then take it away 
+when traffic reaches a certain level and re-parking it for an outragous amount of money. What they really mean
+is 'free as long as it is worthless'.
+
+2014
+----
+Development here has been deemed more of a sandbox than working integration parts, and because of that, I will
+not be using most of it for gxbase's defaults and if I do, may become a separate project which will cause it 
+to become a dependency. It is here now still because they are not complete, and I want it to be available in
+case someone decides it is useful to complete it at some point, especially myself and forkers.

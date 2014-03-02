@@ -1,0 +1,42 @@
+ a text outputting (echoing) helper for gxbase
+
+ gxechohelper [commmand] [string]
+
+ [command] can be one of:
+
+   --help           this help text
+
+   colorize [color] colorizes the text to be outputted, The [color] part must be one of:
+                    red, green, yellow, blue, cyan, magenta, or gray/white.  It can also
+                    optionally include the word "bright" as a prefix (for i.e, brightblue)
+                    which will adjust color accordingly. The colorization effects the text
+                    that will be colorized by character depending their on Alpha, Numeric,
+                    Digit, or Symbol. Ansi escape sequences will be left alone so they
+                    can be properly decoded however do not expect basic color sequences
+                    to have any effect because the internal colorizer will set the color
+                    once again on the next character. However this does not include 
+                    background colors, which will be preserved. Please note that the word
+                    "dark" is stripped from color names as it is implied already on all non
+                    bright codes. 
+
+
+  [string]          Can be any legal text string as per the command interpreter's rules. All 
+                    text that is held in the third argument will be printed. No special attention
+                    is given to any characters as far as outputting is concearned except for a few
+                    translations that you should be aware of. These include the standard printf
+                    codes which are prefixed with back-slash. See your printf documentation
+                    for details on that. In addition to printf codes, you may also include baskslash+e
+                    which will show an escape character code 27, useful for ansi escape sequences. This
+                    is done to keep accordance with bash's echo -e behavior. And as always, a double
+                    backslash is how you print just a normal backslash. Backslash and two hex digits
+                    for any character value is also supported. Unicode chars are not supported, you can
+                    get any other unsupported codes via piping. Keep in mind this is a tool designed for
+                    use by the gxbase system so it isn't meant for heavy user interaction. If 
+                    you need interaction try gxbase's other user-level tools (see the gxbase docs for
+                    all of that).
+
+ This documentation is written in English and has no translation at the moment. If you require a copy in
+ another language, please write to: <osirisgothra@hotmail.com> and I'll get you one as soon as possible.
+ All other bugs, concearns, etc can also be forwarded to this address. For licensing please refer to the
+ GPL3 that was included with this package (GXBASE). This file shouldn't be distributed without the express
+ permission of the author, and never without the GXBASE distribution.
