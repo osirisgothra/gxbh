@@ -1,0 +1,4 @@
+
+
+int getzerocount(int origin);
+

@@ -1,0 +1,41 @@
+
+  nopwlog README
+
+	a (very) small program to reduce resource use on terminals waiting for local login
+	WARNING: logins do not require passwords, hence the name 'nopwlogin'
+
+	USAGE
+
+	To use this program, you will need root privs, and hopefully the administrator's permission!
+
+	Example (for systems using upstart)
+
+	open your /etc/init/tty1.conf (or whatever tty you are editing)
+  your tty file should have a line like this:
+
+	  exec /sbin/getty -8 38400 tty1
+
+	simply add "-nl /bin/nopwlog" (assuming you placed nopwlog in /bin) to the
+	same command line to make it look like this:
+
+		exec /sbin/getty -nl "/bin/nopwlog" -8 38400 tty1
+
+	in this instance, quotes are not required. However, if you use a path/file combination
+	that contains spaces or special characters you WILL need them!
+
+	MAKE SURE you do not touch any other part of the tty1.conf unless you know what you are doing!
+
+
+	OTHER USES
+
+	Not sure, let me know: osirisgothra@hotmail.com
+	Made this for myself, there are probably many more like it!
+
+	This is part of the gxbase 'expermental-helpers' archive
+
+		available here: http://gitorious.org/gxbase/helpers-experimental
+
+	Written by Gabriel T Sharp
+	Thurs April 24 2014
+
+
