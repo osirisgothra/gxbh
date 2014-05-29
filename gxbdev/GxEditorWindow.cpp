@@ -3,6 +3,6 @@
 GxEditorWindow::GxEditorWindow(QTextDocument *source, QWidget *parent) :
     QTextEdit(parent)
 {
-    this->setDocument(source);
+    this->setDocument(source);    
 
 }

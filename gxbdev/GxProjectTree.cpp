@@ -1,42 +1,93 @@
 #include "GxProjectTree.h"
+#include <QtCore>
+#include <QtGui>
+#include <Qt>
+#include <QtXml/QtXml>
+#include <QTextDocument>
+#include "GxProjectItem.h"
+#include "GxCreateProjectWindow.h"
+#include "ui_GxCreateProjectWindow.h"
 
 #define GXPRJ_DATACOLUMN    2
 #define GXPRJ_DATAROLE      Qt::UserRole
-///
-/// \brief __bi2pi
-/// \param ti tree item to work with
-/// \param pi (if NULL) causes __bi2pi to try to extract a GxProjectItem from the item specified by ``ti''
-/// \param pi (if not NULL) the GxProjectItem to bind to the tree item specified by ``ti''
-/// \return the project item bound to ``ti'' if any, when ``pi'' is not NULL, and a ``pi'' is already present and/or a different object, returns the old object being replaced
-/// \note internal use only, does not delete any pointers even if replacing, \sa __delete_twpi
-GxProjectItem* __bi2pi(QTreeWidgetItem* ti, GxProjectItem* pi = NULL)
-{
-    QVariant usrdata = ti->data(GXPRJ_DATACOLUMN,GXPRJ_DATAROLE);
-    GxProjectItem* retval = (GxProjectItem*) usrdata.value<void*>();
-
-    if (pi != NULL)
-    {
-        QVariant setdata = QVariant::fromValue<void*>((void*)pi);
-        ti->setData(GXPRJ_DATACOLUMN,GXPRJ_DATAROLE,setdata);
-
-    }
-    return retval;
-}
-
 
 GxProjectTree::GxProjectTree(QWidget *parent) :
     QTreeWidget(parent)
 {
+
     // create the project as empty
-    QTreeWidgetItem* root_twi = new QTreeWidgetItem();
-    GxProjectItem* root_pji = new GxProjectItem("Untitled",this,root_twi);
-    __bi2pi(root_twi,root_pji);
-    insertTopLevelItem(0,root_twi);
+    GxProjectItem* root_pji = new GxProjectItem("Untitled");
+    insertTopLevelItem(0,*root_pji);
 
 }
 
-
-GxProjectItem::GxProjectItem(QString name, GxProjectTree *owner, QTreeWidgetItem *parentitem)
+int GxProjectTree::AddProject()
 {
+    // reuse regular project items as a project root
+    // the name of the project is stored in the label
+    GxCreateProjectWindow* w = new GxCreateProjectWindow();
+
+    if (w->exec() == QDialog::Accepted)
+    {
+        GxProjectItem* newitem = new GxProjectItem(w->ui->projectName->text());
+        newitem->documentFullPath = w->ui->projectFile->text();
+        newitem->refresh();
+        addTopLevelItem(*newitem);
+        return topLevelItemCount() - 1; // index to new project
+    }
+    else
+        return -1; // no project created
+
 
 }
+
+int GxProjectTree::SelectedProject()
+{
+    if (topLevelItemCount() > 0)
+    {
+        if (selectedItems().count() == 0)
+        {
+            return 0;   // topmost project, if any
+        }
+        else
+        {
+            bool atTop = false;
+            QTreeWidgetItem* selitem = this->selectedItems().at(0);
+            while (!atTop)
+            {
+                if (selitem->parent() != NULL)
+                    selitem = selitem->parent();
+                else
+                    atTop = true;
+            }
+            Q_ASSERT(atTop);
+            for (int i =0; i < this->ProjectCount(); i++)
+            {
+                if (selitem == topLevelItem(i))
+                    return i;
+            }
+            Q_ASSERT(FALSE);
+            return -1; // didn't exist, which should not happen
+        }
+    }
+    else
+        return -1; // no items, so no projects (and therefore no selection possible)
+}
+
+int GxProjectTree::ProjectCount()
+{
+    return topLevelItemCount();
+}
+
+const GxProjectItem &GxProjectTree::GetProject(int pos)
+{
+    QTreeWidgetItem* item = this->topLevelItem(pos);
+    GxProjectItem* project_item = dynamic_cast<GxProjectItem*>(item);
+    if (!project_item)
+        throw item; // throw the item back if it doesnt have a pi attached
+    return *project_item;
+}
+
+
+
+

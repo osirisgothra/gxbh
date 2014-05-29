@@ -1,34 +1,33 @@
-#include "GXMainWindow.h"
-#include "terminal.h"
+#include "GxMainWindow.h"
 #include <qtermwidget.h>
-#include "ui_GXMainWindow.h"
+#include "ui_GxMainWindow.h"
 #include <QtGui>
 #include <QtCore>
+#include "GxProjectItem.h"
+#include "GxProjectTree.h"
 
-GXMainWindow::GXMainWindow(QWidget *parent) :
+
+GxMainWindow::GxMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::GXMainWindow)
+    ui(new Ui::GxMainWindow)
 {
     ui->setupUi(this);
-    QApplication::processEvents();
-
-
-
+    QApplication::processEvents();    
 
 }
 
-GXMainWindow::~GXMainWindow()
+GxMainWindow::~GxMainWindow()
 {
     delete ui;
 }
 
-void GXMainWindow::on_exec_pressed()
+void GxMainWindow::on_exec_pressed()
 {
-    QString txt = "/gxbase/gxbase\n";
-    ui->term->sendText(txt);
+    QString str = ui->cmdline->text() + "\n";
+    ui->term->sendText(str);
 }
 
-void GXMainWindow::on_actionAdd_New_Item_triggered()
+void GxMainWindow::on_actionAdd_New_Item_triggered()
 {
     bool pressed = false;
     QString docname = QInputDialog::getText(this,
@@ -38,12 +37,16 @@ void GXMainWindow::on_actionAdd_New_Item_triggered()
                                             "Untitled" + QString::number(open_documents.count()+1),&pressed
                                            );
     if (pressed)
-    {
-        QTextDocument* newdoc = new QTextDocument(this);
-        newdoc->setMetaInformation(QTextDocument::DocumentTitle,docname);
+    {        
         // add to project
+
 
 
     }
 
+}
+
+void GxMainWindow::on_actionNew_Project_triggered()
+{
+    this->ui->projtree->AddProject();
 }
