@@ -37,7 +37,6 @@ public:
     KUrlRequester *projectFile;
     QLabel *projectNameLabel;
     KLineEdit *projectName;
-    QLabel *projectNameLabel_2;
     KEditListBox *epi;
     QDialogButtonBox *buttonBox;
 
@@ -74,13 +73,11 @@ public:
 
         verticalLayout_2->addWidget(projectName);
 
-        projectNameLabel_2 = new QLabel(groupBox);
-        projectNameLabel_2->setObjectName(QString::fromUtf8("projectNameLabel_2"));
-
-        verticalLayout_2->addWidget(projectNameLabel_2);
-
         epi = new KEditListBox(groupBox);
         epi->setObjectName(QString::fromUtf8("epi"));
+        epi->setFlat(true);
+        epi->setCheckable(true);
+        epi->setChecked(false);
 
         verticalLayout_2->addWidget(epi);
 
@@ -97,6 +94,9 @@ public:
 
         verticalLayout->addWidget(buttonBox);
 
+        QWidget::setTabOrder(projectFile, projectName);
+        QWidget::setTabOrder(projectName, epi);
+        QWidget::setTabOrder(epi, buttonBox);
 
         retranslateUi(GxCreateProjectWindow);
         QObject::connect(buttonBox, SIGNAL(accepted()), GxCreateProjectWindow, SLOT(accept()));
@@ -113,7 +113,7 @@ public:
         projectFile->setClickMessage(QApplication::translate("GxCreateProjectWindow", "Please Select a Filename and Location", 0, QApplication::UnicodeUTF8));
         projectNameLabel->setText(QApplication::translate("GxCreateProjectWindow", "Project Name (Used Internally)", 0, QApplication::UnicodeUTF8));
         projectName->setClickMessage(QApplication::translate("GxCreateProjectWindow", "Project Name", 0, QApplication::UnicodeUTF8));
-        projectNameLabel_2->setText(QApplication::translate("GxCreateProjectWindow", "Initial Project Items (Optional)", 0, QApplication::UnicodeUTF8));
+        epi->setTitle(QApplication::translate("GxCreateProjectWindow", "Initial Project Items (Optional)", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

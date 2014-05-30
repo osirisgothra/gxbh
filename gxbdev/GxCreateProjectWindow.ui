@@ -21,7 +21,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0">
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0">
         <item>
          <widget class="QLabel" name="projectFileLabel">
           <property name="text">
@@ -51,14 +51,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="projectNameLabel_2">
-          <property name="text">
+         <widget class="KEditListBox" name="epi">
+          <property name="title">
            <string>Initial Project Items (Optional)</string>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
          </widget>
-        </item>
-        <item>
-         <widget class="KEditListBox" name="epi"/>
         </item>
        </layout>
       </item>
@@ -94,6 +100,12 @@
    <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>projectFile</tabstop>
+  <tabstop>projectName</tabstop>
+  <tabstop>epi</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -103,8 +115,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -119,8 +131,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>503</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

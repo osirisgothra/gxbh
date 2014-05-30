@@ -19,6 +19,8 @@ public:
     friend class GxProjectTree;
 protected:
     Ui::GxCreateProjectWindow *ui;
+private slots:
+    void on_epi_added(const QString &text);
 };
 
 #endif // GXCREATEPROJECTWINDOW_H

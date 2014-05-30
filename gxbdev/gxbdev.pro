@@ -7,6 +7,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = gxbdev
 TEMPLATE = app
 
+QMAKE_CXX = g++-4.7
+
+
 LIBS += -lX1164 -lutil -lqtermwidget -lkdeui -lkio
 
 SOURCES += main.cpp\
@@ -25,4 +28,3 @@ HEADERS  += GxMainWindow.h \
 FORMS    += GxMainWindow.ui \
     GxCreateProjectWindow.ui
 
-INCLUDEPATH += /src/r
