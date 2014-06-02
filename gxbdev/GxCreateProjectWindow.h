@@ -17,10 +17,18 @@ public:
     ~GxCreateProjectWindow();
 
     friend class GxProjectTree;
+
+    QString projectFilename;
+    QString projectDispname;
+    QStringList projectItems;
+    bool projectWantItems;
+
 protected:
     Ui::GxCreateProjectWindow *ui;
 private slots:
     void on_epi_added(const QString &text);
+    void checkControls();
+
 };
 
 #endif // GXCREATEPROJECTWINDOW_H

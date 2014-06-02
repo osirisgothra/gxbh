@@ -22,7 +22,7 @@ static const uint qt_meta_data_GxCreateProjectWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,13 +31,14 @@ static const uint qt_meta_data_GxCreateProjectWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       28,   23,   22,   22, 0x08,
+      50,   22,   22,   22, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GxCreateProjectWindow[] = {
     "GxCreateProjectWindow\0\0text\0"
-    "on_epi_added(QString)\0"
+    "on_epi_added(QString)\0checkControls()\0"
 };
 
 void GxCreateProjectWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -47,6 +48,7 @@ void GxCreateProjectWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         GxCreateProjectWindow *_t = static_cast<GxCreateProjectWindow *>(_o);
         switch (_id) {
         case 0: _t->on_epi_added((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->checkControls(); break;
         default: ;
         }
     }
@@ -84,9 +86,9 @@ int GxCreateProjectWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

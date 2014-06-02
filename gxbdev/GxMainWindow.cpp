@@ -5,7 +5,7 @@
 #include <QtCore>
 #include "GxProjectItem.h"
 #include "GxProjectTree.h"
-
+#include <KDE/KTextEdit>
 
 GxMainWindow::GxMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -38,9 +38,11 @@ void GxMainWindow::on_actionAdd_New_Item_triggered()
                                            );
     if (pressed)
     {        
-        // add to project
-
-
+        //TODO:
+        // SelectedProject->AddSubItem (if no selected)
+        // OR
+        // SelectedItem->AddSubItem
+        //
 
     }
 
@@ -49,4 +51,42 @@ void GxMainWindow::on_actionAdd_New_Item_triggered()
 void GxMainWindow::on_actionNew_Project_triggered()
 {
     this->ui->projtree->AddProject();
+}
+
+void GxMainWindow::on_projtree_doubleClicked(const QModelIndex &index)
+{
+    GxProjectItem& item = ui->projtree->projectItemFromIndex(index);
+    if (item.subWindowLink() == NULL)
+    {
+        item.setOpen(true); // validity checking done inside here
+        if (item.isOpen())
+        {
+
+            KTextEdit *win = new KTextEdit();
+            win->setLineWrapMode(KTextEdit::NoWrap);
+            win->setCheckSpellingEnabled(false);
+            win->setDocument(item.openedDocumentContent);
+            win->document()->setDefaultFont(QFont("Ubuntu Mono",14));
+            QPalette* palette = new QPalette();
+            palette->setColor(QPalette::Base,QColor(0,0,0));
+            palette->setColor(QPalette::Text,QColor(128,128,128));
+            win->setPalette(*palette);
+
+            QMdiSubWindow* subwin = ui->mdiArea->addSubWindow(win);
+            item.setSubWindowLink(subwin);
+            item.subWindowLink()->setWindowTitle(item.documentDispName);
+            subwin->show();;
+            subwin->setWindowState(Qt::WindowMaximized);
+        }
+    }
+    else
+    {
+        item.subWindowLink()->setFocus();
+    }
+
+}
+
+void GxMainWindow::on_actionAbout_triggered()
+{
+
 }

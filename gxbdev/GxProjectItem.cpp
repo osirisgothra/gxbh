@@ -1,9 +1,20 @@
 #include "GxProjectItem.h"
 #include <QStringBuilder>
+#include "GxDevException.h"
 #define _TLW QApplication::topLevelWidgets()[0]
+#include <boost/cast.hpp>
+#include "GxSyntaxHighlighter.h"
 
+using namespace boost;
 
-GxProjectItem::GxProjectItem(QString name)
+// custom values for SetData/Data
+#define GXPCOL 12
+#define GXPROLE Qt::UserRole+GXPCOL
+//shortcut for above
+#define GXPCR GXPCOL,GXPROLE
+// used for static operations
+
+GxProjectItem::GxProjectItem(QString name):_subWindowLink(NULL)
 {
     QFileInfo fi(name);
 
@@ -26,6 +37,10 @@ GxProjectItem::GxProjectItem(QString name)
     documentDispName = fi.fileName();
     // create the tree widget item using the short name as the label
     owneritem = new QTreeWidgetItem();
+    refresh();
+
+    // LINK the owneritem so it can be reverse-connected to this item
+    setref(NULL);
 
 
 }
@@ -55,6 +70,7 @@ bool GxProjectItem::setOpen(bool value)
         // and then close by deleting the item and setting ondisk, etc
         ondisk = true;
         delete openedDocumentContent;
+        delete _highlighter;
         openedDocumentContent = NULL;
         return true; // ... and it all worked out
     }
@@ -67,6 +83,7 @@ bool GxProjectItem::setOpen(bool value)
             if (docfile.open(QFile::ReadOnly))
             {
                 openedDocumentContent = new QTextDocument(this);
+                _highlighter = new GxSyntaxHighlighter(openedDocumentContent);
                 Q_ASSERT(openedDocumentContent != NULL);
                 openedDocumentContent->setPlainText(QString(docfile.readAll()));
                 docfile.close();
@@ -145,3 +162,100 @@ const QWidget *GxProjectItem::ownerAppWindow()
     return QApplication::topLevelWidgets().first();
 }
 
+const GxProjectItem &GxProjectItem::next()
+{
+    if (isTopLevel())
+        GX_THROW(ProjItem);
+    int item = owneritem->parent()->indexOfChild(owneritem);
+    return child(item+1);
+
+}
+
+const GxProjectItem &GxProjectItem::prev()
+{
+    if (isTopLevel())
+        GX_THROW(ProjItem);
+    int item = owneritem->parent()->indexOfChild(owneritem);
+    return child(item-1);
+}
+
+const GxProjectItem &GxProjectItem::child(int pos)
+{
+    if ((pos+1) > owneritem->childCount())
+        GX_THROW(ProjItem);
+    return getref(owneritem->child(pos));
+
+}
+
+const GxProjectItem &GxProjectItem::parent()
+{
+    if (isTopLevel())
+        GX_THROW(ProjItem);
+    else
+        return *((GxProjectItem*)owneritem->parent()->data(GXPCR).value<void*>());
+}
+
+bool GxProjectItem::isTopLevel()
+{
+    return (owneritem->parent() == NULL);
+}
+
+const GxProjectItem &GxProjectItem::insertSubItem(QString path, QString name, bool _ondisk, bool _opened, QTextDocument *_opencontent)
+{
+    GxProjectItem* projitem = new GxProjectItem(name);
+
+    projitem->documentFullPath = path;
+    projitem->ondisk = _ondisk;
+    projitem->openedDocumentContent = _opened? _opencontent:NULL;
+    projitem->refresh(); // synchronize <-> treeitem
+
+    owneritem->addChild(projitem->owneritem); // owneritem is linked to projitem, so the pointer wont be lost
+
+    return *projitem; // could be discarded here
+
+}
+
+
+GxProjectItem& GxProjectItem::getref(QTreeWidgetItem* item)
+{
+    if (!item)
+        item = owneritem;
+    GxProjectItem* datavalue = item->data(GXPCR).value<GxProjectItem*>();
+
+    if (!datavalue)
+        GX_THROW(ProjItem);
+    return *datavalue;
+}
+
+void GxProjectItem::setref(QTreeWidgetItem *item, GxProjectItem *ref)
+{
+    if (!ref)
+        ref = this;
+    if (!item)
+        item = owneritem;
+    item->setData(GXPCR,QVariant::fromValue<GxProjectItem*>(ref));
+}
+QMdiSubWindow *GxProjectItem::subWindowLink() const
+{
+    return _subWindowLink;
+}
+
+void GxProjectItem::setSubWindowLink(QMdiSubWindow *subWindowLink)
+{
+    _subWindowLink = subWindowLink;
+}
+
+
+GxProjectItem &GxProjectItem::itemtoref(const QTreeWidgetItem& item)
+{
+    GxProjectItem GX_DUMMY_ITEM("GX_DUMMY_ITEM");
+    // all exceptions are done at getref
+    return GX_DUMMY_ITEM.getref(const_cast<QTreeWidgetItem*>(&item));
+}
+
+void GxProjectItem::reftoitem(const QTreeWidgetItem& item, const GxProjectItem& ref)
+{
+    GxProjectItem GX_DUMMY_ITEM("GX_DUMMY_ITEM");
+    // all exceptions @ setref
+    GX_DUMMY_ITEM.setref(const_cast<QTreeWidgetItem*>(&item), const_cast<GxProjectItem*>(&ref));
+}

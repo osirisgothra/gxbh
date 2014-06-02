@@ -25,6 +25,10 @@ private slots:
 
     void on_actionNew_Project_triggered();
 
+    void on_projtree_doubleClicked(const QModelIndex &index);
+
+    void on_actionAbout_triggered();
+
 private:
     QList<QTextDocument*> open_documents;
 

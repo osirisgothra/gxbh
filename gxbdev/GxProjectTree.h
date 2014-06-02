@@ -21,8 +21,8 @@ public:
     int SelectedProject(void);
     int ProjectCount(void);
 
-    const GxProjectItem& GetProject(int pos);
-
+    GxProjectItem &GetProject(int pos);
+    GxProjectItem &projectItemFromIndex(const QModelIndex& index);
 
 signals:
 

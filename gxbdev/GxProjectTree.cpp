@@ -7,6 +7,7 @@
 #include "GxProjectItem.h"
 #include "GxCreateProjectWindow.h"
 #include "ui_GxCreateProjectWindow.h"
+#include <GxDevException.h>
 
 #define GXPRJ_DATACOLUMN    2
 #define GXPRJ_DATAROLE      Qt::UserRole
@@ -26,13 +27,40 @@ int GxProjectTree::AddProject()
     // reuse regular project items as a project root
     // the name of the project is stored in the label
     GxCreateProjectWindow* w = new GxCreateProjectWindow();
+    w->projectDispname = "gxbase";
+    w->projectFilename = "/gxbase/project.gxb";
+    w->projectWantItems = true;
+    w->projectItems.append("/gxbase/res/bashrc");
+    w->projectItems.append("/gxbase/res/bash-helpers");
+    w->projectItems.append("/gxbase/res/bash-vars");
+    w->projectItems.append("/gxbase/res/bash-traps");
+    w->projectItems.append("/gxbase/res/bash-aliases");
+    w->projectItems.append("/gxbase/res/bash-settings");
+    w->projectItems.append("/gxbase/res/bash-bindings");
 
-    if (w->exec() == QDialog::Accepted)
+    if (true)// (w->exec() == QDialog::Accepted)
     {
-        GxProjectItem* newitem = new GxProjectItem(w->ui->projectName->text());
-        newitem->documentFullPath = w->ui->projectFile->text();
-        newitem->refresh();
+
+        GxProjectItem* newitem = new GxProjectItem(w->projectDispname);
+
+        newitem->documentFullPath = w->projectFilename;
+        newitem->documentDispName = w->projectDispname;
+        newitem->refresh(); // sync between item<->treeitem
+
+        if (w->projectWantItems)
+        {
+            // add their subitems as well
+            foreach (QString pth, w->projectItems)
+            {
+                QFileInfo p(pth);
+                if (p.exists())
+                    newitem->insertSubItem(pth,p.baseName(),true,false,NULL);
+
+            }
+
+        }
         addTopLevelItem(*newitem);
+
         return topLevelItemCount() - 1; // index to new project
     }
     else
@@ -79,13 +107,22 @@ int GxProjectTree::ProjectCount()
     return topLevelItemCount();
 }
 
-const GxProjectItem &GxProjectTree::GetProject(int pos)
+GxProjectItem &GxProjectTree::GetProject(int pos)
 {
     QTreeWidgetItem* item = this->topLevelItem(pos);
     GxProjectItem* project_item = dynamic_cast<GxProjectItem*>(item);
     if (!project_item)
         throw item; // throw the item back if it doesnt have a pi attached
     return *project_item;
+}
+
+GxProjectItem &GxProjectTree::projectItemFromIndex(const QModelIndex &index)
+{
+    QTreeWidgetItem* item = QTreeWidget::itemFromIndex(index);
+    if (item)
+        return GxProjectItem::itemtoref(*item);
+    else
+        GX_THROW(ProjTree);
 }
 
 
