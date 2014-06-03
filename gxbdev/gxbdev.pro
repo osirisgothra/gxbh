@@ -12,9 +12,9 @@ TEMPLATE = app
 QMAKE_CXX = g++-4.7
 
 
-LIBS += -lX1164 -lutil -lqtermwidget -lkdeui -lkio -lboost_filesystem -lboost_system
+LIBS += -lX1164 -lutil -lqtermwidget -lkdeui -lkio -lboost_filesystem -lboost_system -lkdecore
 
-SOURCES += main.cpp\
+SOURCES +=\
         GxMainWindow.cpp \
     GxEditorWindow.cpp \
     GxProjectTree.cpp \

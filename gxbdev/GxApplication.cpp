@@ -5,31 +5,35 @@
 #include <KDE/KMessageBox>
 #include <KDE/KAboutData>
 
-KAboutData* aboutData= new KAboutData(
-                                i18n("gxbase").toUtf8(),
-                                i18n("gxbase").toUtf8(),
-                                ki18n("gxbdev"),
-                                i18n("0.2.0.0").toUtf8(),
-                                ki18n("GxBase Development IDE"),
-                          KAboutData::License_GPL_V2,
-                                ki18n("(C)2014 Paradisim Enterprises, LLC"),
-                                ki18n("Please read the README file(s) distributed with this program."),
-                                i18n("http://www.gitorious.org/+paradisim").toUtf8(),
-                                i18n("osirisgothra@hotmail.com").toUtf8()
-                                      );
-
+KAboutData* aboutData;
 
 int main(int argc, char *argv[])
 {
     // COMMAND LINE PARSING SECTION
 
+    aboutData = new KAboutData(
+                "gxbase",
+                "gxbase",
+                ki18n("gxbdev"),
+                "0.2.0.0",
+                ki18n("GxBase Development IDE"),
+          KAboutData::License_GPL_V2,
+                ki18n("(C)2014 Paradisim Enterprises, LLC"),
+                ki18n("Please read the README file(s) distributed with this program."),
+                "http://www.gitorious.org/+paradisim",
+                "osirisgothra@hotmail.com"
+                      );
+
+
 
     KCmdLineArgs::init(argc,argv,aboutData);
-    KCmdLineOptions options;        options.add(i18n("version").toLocal8Bit(),ki18n("Report version and exit"));
+    KCmdLineOptions options;        options.add("version",ki18n("Report version and exit"));
     KCmdLineArgs::addCmdLineOptions(options);
     GxApplication app; // Our documentation says to put these items here.
     GxMainWindow w;    // <-------/
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+
+    app.setStyleSheet("* { background: black; color: white; } ");
 
     if (args->isSet("version"))
     {

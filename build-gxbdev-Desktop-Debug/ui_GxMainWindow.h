@@ -69,6 +69,8 @@ public:
     QAction *actionSave_All;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_5;
     QMdiArea *mdiArea;
     QMenuBar *menuBar;
     QMenu *menu_File;
@@ -359,10 +361,32 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        mdiArea = new QMdiArea(centralWidget);
+        widget = new QWidget(centralWidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setAutoFillBackground(false);
+        widget->setStyleSheet(QString::fromUtf8("border: 3px solid; border-radius: 8px; background-color: gray;\n"
+"border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 rgba(255, 255, 255, 255), stop:0.486034 rgba(109, 109, 109, 255), stop:1 rgba(0, 0, 0, 255));"));
+        horizontalLayout_5 = new QHBoxLayout(widget);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        mdiArea = new QMdiArea(widget);
         mdiArea->setObjectName(QString::fromUtf8("mdiArea"));
+        mdiArea->setAutoFillBackground(false);
+        mdiArea->setStyleSheet(QString::fromUtf8("border: none;"));
+        QBrush brush(QColor(92, 92, 92, 255));
+        brush.setStyle(Qt::SolidPattern);
+        mdiArea->setBackground(brush);
+        mdiArea->setActivationOrder(QMdiArea::ActivationHistoryOrder);
+        mdiArea->setViewMode(QMdiArea::TabbedView);
+        mdiArea->setTabsClosable(true);
+        mdiArea->setTabsMovable(true);
+        mdiArea->setTabPosition(QTabWidget::South);
 
-        horizontalLayout->addWidget(mdiArea);
+        horizontalLayout_5->addWidget(mdiArea);
+
+
+        horizontalLayout->addWidget(widget);
 
         GxMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GxMainWindow);
