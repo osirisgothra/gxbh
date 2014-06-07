@@ -17,11 +17,13 @@ public:
 
     // in a matter of speaking, a gxprojectitem
     // is any toplevel item
-    int AddProject();
-    int SelectedProject(void);
-    int ProjectCount(void);
+    int addProject();
+    int selectedProject(void);
+    int projectCount(void);
 
-    GxProjectItem &GetProject(int pos);
+    GxProjectItem &findBySubWindowLink(QMdiSubWindow* link);
+
+    GxProjectItem &getProject(int pos);
     GxProjectItem &projectItemFromIndex(const QModelIndex& index);
 
 signals:

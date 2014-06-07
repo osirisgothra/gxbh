@@ -4,35 +4,40 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QtCore>
-
+#include <KDE/KMainWindow>
 namespace Ui {
 class GxMainWindow;
 }
 
 
-class GxMainWindow : public QMainWindow
+class GxMainWindow : public KMainWindow
 {
     Q_OBJECT
 
 public:
     explicit GxMainWindow(QWidget *parent = 0);
     ~GxMainWindow();
+    QLineEdit* line;
+    QAction* lineAction;
 
 private slots:
-    void on_exec_pressed();
-    void on_actionAdd_New_Item_triggered();
+    void onExecPressed();
+    void onActionaddNewItemTriggered();
+    void onActionnewProjectTriggered();
+    void onProjtreeDoubleclicked(const QModelIndex &index);
+    void onActionaboutTriggered();
+    void onTermFinished();
 
 
-    void on_actionNew_Project_triggered();
 
-    void on_projtree_doubleClicked(const QModelIndex &index);
-
-    void on_actionAbout_triggered();
+    void onActionCloseTriggered();
 
 private:
     QList<QTextDocument*> open_documents;
 
     Ui::GxMainWindow *ui;
+    Ui::GxMainWindow *setupUi(); // ensure ui setup happens first (prevents any possibility otherwise)
+
 };
 
 #endif // GXMAINWINDOW_H

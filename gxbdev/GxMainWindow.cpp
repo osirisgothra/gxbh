@@ -6,28 +6,34 @@
 #include "GxProjectItem.h"
 #include "GxProjectTree.h"
 #include <KDE/KTextEdit>
+#include <KDE/KMainWindow>
+#include <KDE/KApplication>
+#include <KDE/KHelpMenu>
+#include <boost/cast.hpp>
+
 
 GxMainWindow::GxMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::GxMainWindow)
+    KMainWindow(parent), ui(setupUi())
 {
-    ui->setupUi(this);
-    QApplication::processEvents();    
+
+    connect(ui->term,SIGNAL(finished()),this,SLOT(onTermFinished()));
+
 
 }
 
 GxMainWindow::~GxMainWindow()
 {
+
     delete ui;
 }
 
-void GxMainWindow::on_exec_pressed()
+void GxMainWindow::onExecPressed()
 {
     QString str = ui->cmdline->text() + "\n";
     ui->term->sendText(str);
 }
 
-void GxMainWindow::on_actionAdd_New_Item_triggered()
+void GxMainWindow::onActionaddNewItemTriggered()
 {
     bool pressed = false;
     QString docname = QInputDialog::getText(this,
@@ -48,12 +54,12 @@ void GxMainWindow::on_actionAdd_New_Item_triggered()
 
 }
 
-void GxMainWindow::on_actionNew_Project_triggered()
+void GxMainWindow::onActionnewProjectTriggered()
 {
-    this->ui->projtree->AddProject();
+    this->ui->projtree->addProject();
 }
 
-void GxMainWindow::on_projtree_doubleClicked(const QModelIndex &index)
+void GxMainWindow::onProjtreeDoubleclicked(const QModelIndex &index)
 {
     GxProjectItem& item = ui->projtree->projectItemFromIndex(index);
     if (item.subWindowLink() == NULL)
@@ -86,7 +92,37 @@ void GxMainWindow::on_projtree_doubleClicked(const QModelIndex &index)
 
 }
 
-void GxMainWindow::on_actionAbout_triggered()
+void GxMainWindow::onActionaboutTriggered()
 {
+    this->showAboutApplication();
+}
 
+void GxMainWindow::onTermFinished()
+{
+    // start again
+    KApplication::processEvents(QEventLoop::ExcludeUserInputEvents); // provide time for other signals to propagate data in case of parameter changes in the terminal (user keypresses/mouse does NOT do this)
+    // timeslice up
+    try
+    {
+        ui->term->startShellProgram();
+    }
+    catch(...)
+    {
+        QMessageBox::critical(this,"Critical","Cant restart the terminal, a critical error occurred!");
+    }
+
+
+}
+
+void GxMainWindow::onActionCloseTriggered()
+{
+    if (ui->mdiArea->activeSubWindow() != NULL)
+    {
+        KTextEdit* win = boost::polymorphic_cast<KTextEdit*,QMdiSubWindow>(ui->mdiArea->activeSubWindow());
+        if (ui->projtree->findBySubWindowLink(ui->mdiArea->activeSubWindow()).setOpen(false))
+        {
+            ui->mdiArea->removeSubWindow(win);
+            delete win;
+        }
+    }
 }

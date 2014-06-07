@@ -22,7 +22,7 @@ GxProjectTree::GxProjectTree(QWidget *parent) :
 
 }
 
-int GxProjectTree::AddProject()
+int GxProjectTree::addProject()
 {
     // reuse regular project items as a project root
     // the name of the project is stored in the label
@@ -42,6 +42,8 @@ int GxProjectTree::AddProject()
     {
 
         GxProjectItem* newitem = new GxProjectItem(w->projectDispname);
+
+        newitem->setParent(this);
 
         newitem->documentFullPath = w->projectFilename;
         newitem->documentDispName = w->projectDispname;
@@ -69,7 +71,7 @@ int GxProjectTree::AddProject()
 
 }
 
-int GxProjectTree::SelectedProject()
+int GxProjectTree::selectedProject()
 {
     if (topLevelItemCount() > 0)
     {
@@ -89,7 +91,7 @@ int GxProjectTree::SelectedProject()
                     atTop = true;
             }
             Q_ASSERT(atTop);
-            for (int i =0; i < this->ProjectCount(); i++)
+            for (int i =0; i < this->projectCount(); i++)
             {
                 if (selitem == topLevelItem(i))
                     return i;
@@ -102,12 +104,27 @@ int GxProjectTree::SelectedProject()
         return -1; // no items, so no projects (and therefore no selection possible)
 }
 
-int GxProjectTree::ProjectCount()
+int GxProjectTree::projectCount()
 {
     return topLevelItemCount();
 }
 
-GxProjectItem &GxProjectTree::GetProject(int pos)
+GxProjectItem &GxProjectTree::findBySubWindowLink(QMdiSubWindow *link)
+{
+    int count = topLevelItemCount();
+    if (count > 0)
+    {
+        foreach (GxProjectItem* child, findChildren<GxProjectItem*>())
+        {
+            if (child->subWindowLink() == link)
+                return *child;
+        }
+    }
+    GX_THROW(ProjItemNf);
+
+}
+
+GxProjectItem &GxProjectTree::getProject(int pos)
 {
     QTreeWidgetItem* item = this->topLevelItem(pos);
     GxProjectItem* project_item = dynamic_cast<GxProjectItem*>(item);

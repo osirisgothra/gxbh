@@ -156,30 +156,24 @@ GxProjectItem::operator QTreeWidgetItem *()
     return this->owneritem;
 }
 
-const QWidget *GxProjectItem::ownerAppWindow()
-{
-    // used for dialogs, messageboxes, and for general garbage collection (undeleted objects' parent widget set to this)
-    return QApplication::topLevelWidgets().first();
-}
-
-const GxProjectItem &GxProjectItem::next()
+const GxProjectItem &GxProjectItem::nextItem()
 {
     if (isTopLevel())
         GX_THROW(ProjItem);
     int item = owneritem->parent()->indexOfChild(owneritem);
-    return child(item+1);
+    return childItem(item+1);
 
 }
 
-const GxProjectItem &GxProjectItem::prev()
+const GxProjectItem &GxProjectItem::prevItem()
 {
     if (isTopLevel())
         GX_THROW(ProjItem);
     int item = owneritem->parent()->indexOfChild(owneritem);
-    return child(item-1);
+    return childItem(item-1);
 }
 
-const GxProjectItem &GxProjectItem::child(int pos)
+const GxProjectItem &GxProjectItem::childItem(int pos)
 {
     if ((pos+1) > owneritem->childCount())
         GX_THROW(ProjItem);
@@ -187,7 +181,7 @@ const GxProjectItem &GxProjectItem::child(int pos)
 
 }
 
-const GxProjectItem &GxProjectItem::parent()
+const GxProjectItem &GxProjectItem::parentItem()
 {
     if (isTopLevel())
         GX_THROW(ProjItem);
@@ -195,14 +189,14 @@ const GxProjectItem &GxProjectItem::parent()
         return *((GxProjectItem*)owneritem->parent()->data(GXPCR).value<void*>());
 }
 
-bool GxProjectItem::isTopLevel()
-{
-    return (owneritem->parent() == NULL);
-}
 
 const GxProjectItem &GxProjectItem::insertSubItem(QString path, QString name, bool _ondisk, bool _opened, QTextDocument *_opencontent)
 {
     GxProjectItem* projitem = new GxProjectItem(name);
+
+    projitem->setParent(parent());    // IMPORTANT: propagate backwards to the top so we can find ourselves later on
+
+
 
     projitem->documentFullPath = path;
     projitem->ondisk = _ondisk;
@@ -235,6 +229,12 @@ void GxProjectItem::setref(QTreeWidgetItem *item, GxProjectItem *ref)
         item = owneritem;
     item->setData(GXPCR,QVariant::fromValue<GxProjectItem*>(ref));
 }
+
+bool GxProjectItem::isTopLevel()
+{
+    return (owneritem->parent() == NULL);
+}
+
 QMdiSubWindow *GxProjectItem::subWindowLink() const
 {
     return _subWindowLink;

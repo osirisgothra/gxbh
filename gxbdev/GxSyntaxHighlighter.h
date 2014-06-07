@@ -20,15 +20,17 @@ private:
     };
     QVector<HighlightingRule> highlightingRules;
 
-    QRegExp commentStartExpression;
-    QRegExp commentEndExpression;
+    QRegExp hereDocumentStartExpression;
+    QRegExp hereDocumentEndExpression;
 
     QTextCharFormat keywordFormat;
-    QTextCharFormat classFormat;
+    QTextCharFormat delimitersFormat;
     QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
+    QTextCharFormat hereDocumentFormat;
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
+    QTextCharFormat builtinsFormat;
+    QTextCharFormat numericFormat;
 
 };
 

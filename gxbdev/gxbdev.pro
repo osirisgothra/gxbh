@@ -22,7 +22,8 @@ SOURCES +=\
     GxCreateProjectWindow.cpp \
     GxDevException.cpp \
     GxSyntaxHighlighter.cpp \
-    GxApplication.cpp
+    GxApplication.cpp \
+    GxPimpl.cpp
 
 HEADERS  += GxMainWindow.h \
     GxEditorWindow.h \

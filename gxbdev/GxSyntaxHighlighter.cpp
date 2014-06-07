@@ -8,57 +8,72 @@ GxSyntaxHighlighter::GxSyntaxHighlighter(QTextDocument *parent) :
 
      QTextFormat fmt;
      fmt.setBackground(QColor(0,0,0));
-     fmt.setForeground(QColor(128,128,128));
+     fmt.setForeground(QColor(128,138,148));
 
      parent->setDefaultStyleSheet("* { background-color: black; color: white; }");
 
 
-     keywordFormat.setForeground(Qt::darkBlue);
+     keywordFormat.setForeground(Qt::cyan);
      keywordFormat.setFontWeight(QFont::Bold);
      QStringList keywordPatterns;
-     keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
-                     << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
-                     << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
-                     << "\\blong\\b" << "\\bnamespace\\b" << "\\boperator\\b"
-                     << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
-                     << "\\bshort\\b" << "\\bsignals\\b" << "\\bsigned\\b"
-                     << "\\bslots\\b" << "\\bstatic\\b" << "\\bstruct\\b"
-                     << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
-                     << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
-                     << "\\bvoid\\b" << "\\bvolatile\\b";
+     keywordPatterns << "\\!" << "case" << "do" << "done" << "elif" << "else" << "esac" << "fi" << "for" << "function" << "if" << "in" << "select" << "then" << "until" << "while" << "\\{" << "\\}" << "time" << "\\[" << "\\]" << "\\;";
 
-     foreach (const QString &pattern, keywordPatterns) {
-         rule.pattern = QRegExp(pattern);
+     foreach (const QString &pattern, keywordPatterns)
+     {
+         rule.pattern = QRegExp("\\b" + pattern + "\\b");
          rule.format = keywordFormat;
          highlightingRules.append(rule);
      }
 
-     classFormat.setFontWeight(QFont::Bold);
-     classFormat.setForeground(Qt::darkMagenta);
-     rule.pattern = QRegExp("\\bQ[A-Za-z]+\\b");
-     rule.format = classFormat;
+     builtinsFormat.setForeground(Qt::yellow);
+     builtinsFormat.setFontItalic(true);
+     QStringList builtinList;
+     builtinList << "\\:" << "\\." << "alias" << "bg" << "bind" << "break" << "builtin" << "cd" << "command" <<
+             "compgen" << "complete" << "continue" << "declare" << "dirs" << "disown" << "echo" << "enable" << "eval" << "exec" << "exit" << "export" << "fc" << "fg" << "getopts" <<
+             "hash" << "help" << "history" << "jobs" << "kill" << "let" << "local" << "logout" << "popd" << "printf" << "pushd" << "pwd" << "read" << "readonly" << "return" <<
+             "set" << "shift" << "shopt" << "source" << "suspend" << "test" << "times" << "trap" << "type" << "typeset" << "ulimit" << "umask" << "unalias" << "unset" <<
+             "wait";
+
+     foreach (const QString &pattern, builtinList)
+     {
+         rule.pattern = QRegExp("\\b" + pattern + "\\b");
+         rule.format = builtinsFormat;
+         highlightingRules.append(rule);
+     }
+
+
+     delimitersFormat.setFontWeight(QFont::Bold);
+     delimitersFormat.setForeground(QColor(92,92,192));
+     rule.pattern = QRegExp("[\\(\\)\\{\\}\\\"\\'\\<\\>\\|\\`\\*\\-\\+\\=\\%\\$\\^\\&]");
+     rule.format = delimitersFormat;
      highlightingRules.append(rule);
 
-     singleLineCommentFormat.setForeground(Qt::red);
-     rule.pattern = QRegExp("//[^\n]*");
+     numericFormat.setFontFixedPitch(true);
+     numericFormat.setForeground(QColor(255,224,255));
+     rule.pattern = QRegExp("\\b[0-9]+\\b");
+     rule.format = numericFormat;
+     highlightingRules.append(rule);
+
+     singleLineCommentFormat.setForeground(QColor(128,192,128));
+     rule.pattern = QRegExp("#[^\n]*");
      rule.format = singleLineCommentFormat;
      highlightingRules.append(rule);
 
-     multiLineCommentFormat.setForeground(Qt::red);
+     hereDocumentFormat.setForeground(Qt::red);
 
      quotationFormat.setForeground(Qt::darkGreen);
-     rule.pattern = QRegExp("\".*\"");
+     rule.pattern = QRegExp("([\"][^\"]*[\"]|[\'][^\']*[\'])");
      rule.format = quotationFormat;
      highlightingRules.append(rule);
 
      functionFormat.setFontItalic(true);
      functionFormat.setForeground(Qt::blue);
-     rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
+     rule.pattern = QRegExp("function \\b[A-Za-z0-9_]+");      // originally "function \\b[A-Za-z0-9_]+(?=\\()"
      rule.format = functionFormat;
      highlightingRules.append(rule);
 
-     commentStartExpression = QRegExp("/\\*");
-     commentEndExpression = QRegExp("\\*/");
+     hereDocumentStartExpression = QRegExp("\\[<]{1,2}[-]{0,1}");
+     hereDocumentEndExpression = QRegExp("^.*$");
  }
 
  void GxSyntaxHighlighter::highlightBlock(const QString &text)
@@ -76,19 +91,19 @@ GxSyntaxHighlighter::GxSyntaxHighlighter(QTextDocument *parent) :
 
      int startIndex = 0;
      if (previousBlockState() != 1)
-         startIndex = commentStartExpression.indexIn(text);
+         startIndex = hereDocumentStartExpression.indexIn(text);
 
      while (startIndex >= 0) {
-         int endIndex = commentEndExpression.indexIn(text, startIndex);
+         int endIndex = hereDocumentEndExpression.indexIn(text, startIndex);
          int commentLength;
          if (endIndex == -1) {
              setCurrentBlockState(1);
              commentLength = text.length() - startIndex;
          } else {
              commentLength = endIndex - startIndex
-                             + commentEndExpression.matchedLength();
+                             + hereDocumentEndExpression.matchedLength();
          }
-         setFormat(startIndex, commentLength, multiLineCommentFormat);
-         startIndex = commentStartExpression.indexIn(text, startIndex + commentLength);
+         setFormat(startIndex, commentLength, hereDocumentFormat);
+         startIndex = hereDocumentStartExpression.indexIn(text, startIndex + commentLength);
      }
  }

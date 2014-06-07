@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GxMainWindow</class>
- <widget class="QMainWindow" name="GxMainWindow">
+ <widget class="KMainWindow" name="GxMainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -9,6 +9,12 @@
     <width>894</width>
     <height>711</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>122</width>
+    <height>32</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>GxMainWindow</string>
@@ -20,18 +26,17 @@
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
-      <property name="styleSheet">
-       <string notr="true">border: 3px solid; border-radius: 8px; background-color: gray;
-border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 rgba(255, 255, 255, 255), stop:0.486034 rgba(109, 109, 109, 255), stop:1 rgba(0, 0, 0, 255));</string>
-      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QMdiArea" name="mdiArea">
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true">border: none;</string>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
          </property>
          <property name="background">
           <brush brushstyle="SolidPattern">
@@ -64,7 +69,7 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="KMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -73,7 +78,7 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File">
+   <widget class="KMenu" name="menu_File">
     <property name="title">
      <string>&amp;File</string>
     </property>
@@ -92,7 +97,7 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 
     <addaction name="actionSave_Document"/>
     <addaction name="actionSave_Document_As"/>
    </widget>
-   <widget class="QMenu" name="menu_Edit">
+   <widget class="KMenu" name="menu_Edit">
     <property name="title">
      <string>&amp;Edit</string>
     </property>
@@ -101,31 +106,31 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 
     <addaction name="actionPaste"/>
     <addaction name="actionClear"/>
    </widget>
-   <widget class="QMenu" name="menu_View">
+   <widget class="KMenu" name="menu_View">
     <property name="title">
      <string>&amp;View</string>
     </property>
     <addaction name="actionRefresh"/>
    </widget>
-   <widget class="QMenu" name="menu_Tools">
+   <widget class="KMenu" name="menu_Tools">
     <property name="title">
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionConfiguration"/>
    </widget>
-   <widget class="QMenu" name="menu_Help">
+   <widget class="KMenu" name="menu_Help">
     <property name="title">
      <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menu_Window">
+   <widget class="KMenu" name="menu_Window">
     <property name="title">
      <string>&amp;Window</string>
     </property>
     <addaction name="actionClose"/>
    </widget>
-   <widget class="QMenu" name="menuProject">
+   <widget class="KMenu" name="menuProject">
     <property name="title">
      <string>Project</string>
     </property>
@@ -180,6 +185,12 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.122905 
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
    <property name="windowTitle">
     <string>Project Explorer</string>
    </property>
@@ -264,6 +275,125 @@ color: rgb(213, 213, 213);</string>
         </layout>
        </item>
       </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <property name="minimumSize">
+    <size>
+     <width>260</width>
+     <height>186</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>2442</width>
+     <height>524287</height>
+    </size>
+   </property>
+   <property name="floating">
+    <bool>true</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Syntax Highlight Testing</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0,0,1">
+     <property name="spacing">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+       <property name="text">
+        <string>Pattern</string>
+       </property>
+       <property name="indent">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="sh_pattern"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+       <property name="text">
+        <string>Attributes</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KColorButton" name="sh_color">
+       <property name="maximumSize">
+        <size>
+         <width>64</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="color">
+        <color>
+         <red>255</red>
+         <green>255</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="defaultColor">
+        <color>
+         <red>255</red>
+         <green>255</green>
+         <blue>0</blue>
+        </color>
+       </property>
+       <property name="alphaChannelEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KFontComboBox" name="sh_font"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="sh_apply">
+       <property name="text">
+        <string>Apply</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sh_a">
+       <property name="text">
+        <string>Automatic Apply</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -576,6 +706,21 @@ color: rgb(213, 213, 213);</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>KFontComboBox</class>
+   <extends>KComboBox</extends>
+   <header>kfontcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
    <class>QTermWidget</class>
    <extends>QWidget</extends>
    <header location="global">qtermwidget.h</header>
@@ -586,7 +731,104 @@ color: rgb(213, 213, 213);</string>
    <extends>QTreeWidget</extends>
    <header location="global">GxProjectTree.h</header>
   </customwidget>
+  <customwidget>
+   <class>KMainWindow</class>
+   <extends>QMainWindow</extends>
+   <header location="global">KDE/KMainWindow</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KMenuBar</class>
+   <extends>QMenuBar</extends>
+   <header location="global">KDE/KMenuBar</header>
+  </customwidget>
+  <customwidget>
+   <class>KMenu</class>
+   <extends>QMenu</extends>
+   <header location="global">KDE/KMenu</header>
+  </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>sh_a</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sh_apply</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>60</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>63</x>
+     <y>510</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sh_font</sender>
+   <signal>currentFontChanged(QFont)</signal>
+   <receiver>sh_apply</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>32</x>
+     <y>487</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>29</x>
+     <y>509</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sh_color</sender>
+   <signal>changed(QColor)</signal>
+   <receiver>sh_apply</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sh_pattern</sender>
+   <signal>returnPressed()</signal>
+   <receiver>sh_apply</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>421</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>210</x>
+     <y>510</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sh_apply</sender>
+   <signal>clicked()</signal>
+   <receiver>mdiArea</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>191</x>
+     <y>510</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>361</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

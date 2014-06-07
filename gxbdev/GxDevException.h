@@ -11,6 +11,7 @@ using namespace std;
 #define NewGxDevProjEx NewGxDevException(Project)
 #define NewGxDevAppEx NewGxDevException(Application)
 #define NewGxDevProjItemEx NewGxDevException(ProjectItem)
+#define NewGxDevProjItemNfEx NewGxDevException(ProjectItemMissing)
 #define NewGxDevProjTreeEx NewGxDevException(ProjectTree)
 #define NewGxDevProjDocEx NewGxDevException(ProjectDocument)
 #define NewGxDevProjFileEx NewGxDevException(ProjectFile)

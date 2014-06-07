@@ -33,7 +33,11 @@ int main(int argc, char *argv[])
     GxMainWindow w;    // <-------/
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
-    app.setStyleSheet("* { background: black; color: white; } ");
+    QPalette pal;
+    pal.setColor(QPalette::Base,Qt::black);
+    pal.setColor(QPalette::Text,Qt::gray);
+    app.setPalette(pal);
+
 
     if (args->isSet("version"))
     {
