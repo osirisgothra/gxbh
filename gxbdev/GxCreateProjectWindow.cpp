@@ -11,7 +11,7 @@ GxCreateProjectWindow::GxCreateProjectWindow(QWidget *parent) :
     ui(new Ui::GxCreateProjectWindow)
 {
     ui->setupUi(this);
-    KUrlRequester* req = new KUrlRequester(this);
+    req = new KUrlRequester(this);
     req->setClickMessage("Type a Filename or a Wildcard Expression");
     ui->epi->setCustomEditor(req->customEditor());
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
@@ -27,6 +27,7 @@ GxCreateProjectWindow::GxCreateProjectWindow(QWidget *parent) :
 GxCreateProjectWindow::~GxCreateProjectWindow()
 {
     delete ui;
+    delete req;
 }
 
 void GxCreateProjectWindow::on_epi_added(const QString &text)

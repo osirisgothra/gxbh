@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
     // COMMAND LINE PARSING SECTION
 
-    aboutData = new KAboutData(
+      KAboutData aboutData(
                 "gxbase",
                 "gxbase",
                 ki18n("gxbdev"),
@@ -26,18 +26,18 @@ int main(int argc, char *argv[])
 
 
 
-    KCmdLineArgs::init(argc,argv,aboutData);
+    KCmdLineArgs::init(argc,argv,&aboutData);
     KCmdLineOptions options;        options.add("version",ki18n("Report version and exit"));
     KCmdLineArgs::addCmdLineOptions(options);
     GxApplication app; // Our documentation says to put these items here.
-    GxMainWindow w;    // <-------/
+    GxMainWindow* w = new GxMainWindow(0);    // <-------/ and the session manager will delete this
+    w->setObjectName("gxbdev#mainwindow");
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
 
     QPalette pal;
     pal.setColor(QPalette::Base,Qt::black);
     pal.setColor(QPalette::Text,Qt::gray);
     app.setPalette(pal);
-
 
     if (args->isSet("version"))
     {
@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
 
     // APPLICATION START-UP SECTION
 
-    w.show();
+    w->show();
     return app.exec();
+
+
 }

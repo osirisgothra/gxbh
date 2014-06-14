@@ -20,7 +20,8 @@ GxMainWindow::GxMainWindow(QWidget *parent) :
 
     connect(ui->term,SIGNAL(finished()),this,SLOT(onTermFinished()));
     connect(ui->actionNew_Project,SIGNAL(triggered()),this,SLOT(onActionnewProjectTriggered()));
-
+    
+    
 }
 
 GxMainWindow::~GxMainWindow()

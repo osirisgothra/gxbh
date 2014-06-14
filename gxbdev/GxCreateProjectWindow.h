@@ -3,7 +3,7 @@
 
 #include <QDialog>
 class GxProjectTree;
-
+class KUrlRequester;
 namespace Ui {
 class GxCreateProjectWindow;
 }
@@ -11,6 +11,8 @@ class GxCreateProjectWindow;
 class GxCreateProjectWindow : public QDialog
 {
     Q_OBJECT
+private:
+    KUrlRequester* req;
 
 public:
     explicit GxCreateProjectWindow(QWidget *parent = 0);

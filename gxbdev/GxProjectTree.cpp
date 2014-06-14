@@ -17,8 +17,8 @@ GxProjectTree::GxProjectTree(QWidget *parent) :
 {
 
     // create the project as empty
-    GxProjectItem* root_pji = new GxProjectItem("Untitled");
-    insertTopLevelItem(0,*root_pji);
+    //GxProjectItem* root_pji = new GxProjectItem("Untitled");
+    //insertTopLevelItem(0,*root_pji);
 
 }
 

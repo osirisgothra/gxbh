@@ -6,7 +6,7 @@ GxDevException::GxDevException(){}
 GxDevException::GxDevException(QString name, QString file, int line)
     : _name(name), _file(file), _line(line)
 {
-
+    // no exception content here, this is on purpose, for now.
 }
 
 int GxDevException::line() const
