@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GxInsertNewProjectItemDialog</class>
+ <widget class="QDialog" name="GxInsertNewProjectItemDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>668</width>
+    <height>568</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Insert New Project Item</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string>Dialog for adding a new file to your project, use tooltips and 'whats this' help on individual items to gain additional help on those items.</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="dialog_layout" stretch="1,0,0">
+   <item>
+    <widget class="QGroupBox" name="template_group">
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>If you check this box the file will be pre-filled with the contents of the selected template</string>
+     </property>
+     <property name="title">
+      <string>Use a Template</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="template_group_layout">
+      <item>
+       <widget class="QSplitter" name="template_splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QWidget" name="list_group_layout_widget">
+         <layout class="QVBoxLayout" name="list_group" stretch="0,1">
+          <item>
+           <widget class="QLabel" name="templateListLabel">
+            <property name="toolTip">
+             <string>Select your template below</string>
+            </property>
+            <property name="whatsThis">
+             <string>Select your template below</string>
+            </property>
+            <property name="text">
+             <string>Pick a Template:</string>
+            </property>
+            <property name="buddy">
+             <cstring>templateList</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListView" name="templateList">
+            <property name="toolTip">
+             <string>Pick the preset Template file from here</string>
+            </property>
+            <property name="whatsThis">
+             <string>Pick a preset template. In addition to built-in templates, the text files that are in $HOME/Templates will be used as well. If you want to add more templates, please place them in that directory.</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="initial_contents_layout_widget">
+         <layout class="QVBoxLayout" name="initial_group">
+          <item>
+           <widget class="QLabel" name="initialContentsLabel">
+            <property name="toolTip">
+             <string>A Preview of the Template, This is exactly the contents to be inserted in the new file. You may also modify the document's initial content from here.</string>
+            </property>
+            <property name="whatsThis">
+             <string>A Preview of the Template, This is exactly the contents to be inserted in the new file. You may also modify the document's initial content from here.</string>
+            </property>
+            <property name="text">
+             <string>Template Preview:</string>
+            </property>
+            <property name="buddy">
+             <cstring>initialContents</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KTextEdit" name="initialContents">
+            <property name="toolTip">
+             <string>Edit the Content of the new Document Here</string>
+            </property>
+            <property name="whatsThis">
+             <string>Edit the Content of the new Document Here</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="names_attributes_group">
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string>Contains attributes and settings for the new project item and file.</string>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>New File Attributes</string>
+     </property>
+     <layout class="QVBoxLayout" name="names_attributes_group_layout" stretch="0,0,1">
+      <item>
+       <widget class="KLineEdit" name="itemDisplay">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string>Project Item's Name Used in the Project Viewer</string>
+        </property>
+        <property name="clickMessage">
+         <string>Project Item Name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KUrlRequester" name="itemName">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;Pick a Filename For Your New File&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Provides an area for you to enter your filename. You can either pick an absolute path, a relative path, or a single name:&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;absolute path example: /home/ubuntu/configrc&lt;/span&gt;&lt;/p&gt;&lt;p&gt;You can pick this if your file is to reside outside the project's directory. The file would be named &amp;quot;configrc&amp;quot; and be located in &amp;quot;/home/ubuntu&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;relative path example: somedir/config/configrc&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Items without a leading / will be interpreted as &lt;span style=&quot; font-style:italic;&quot;&gt;relative. &lt;/span&gt;In this example, if the project directory were to be &amp;quot;/project&amp;quot; then the file would be placed in &amp;quot;/project/somedir/config&amp;quot; with the name &amp;quot;configrc&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;file name only example: configrc&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Although, technically, this is also an example of relative path name, since there is no path at all and just a filename, the file would be placed in &amp;quot;/project&amp;quot; under the name &amp;quot;configrc&amp;quot; when using the project location from the previous example.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Notes: You must not end a filename in a directory separator such as &amp;quot;/&amp;quot; or &amp;quot;\&amp;quot; (depending on your OS). The filename will turn &lt;span style=&quot; color:#ff0000;&quot;&gt;red&lt;/span&gt; if it is not legal.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="mode">
+         <set>KFile::File|KFile::LocalOnly</set>
+        </property>
+        <property name="clickMessage">
+         <string>Pick a Filename For Your New File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="extra_attributes_group" stretch="1,0">
+        <item>
+         <widget class="QCheckBox" name="openAfterCreated">
+          <property name="toolTip">
+           <string>If checked, when this box closes, the new file will be opened for editing right away.</string>
+          </property>
+          <property name="whatsThis">
+           <string>If checked, when this box closes, the new file will be opened for editing right away.</string>
+          </property>
+          <property name="text">
+           <string>Open after Created</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="permissions_group">
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string>New File Permissions</string>
+          </property>
+          <property name="title">
+           <string>New File Permissions</string>
+          </property>
+          <layout class="QHBoxLayout" name="permissions_group_layout">
+           <item>
+            <layout class="QHBoxLayout" name="ugoas_group">
+             <item>
+              <layout class="QVBoxLayout" name="ugo_group">
+               <item>
+                <layout class="QHBoxLayout" name="u_group" stretch="1,0,0,0">
+                 <item>
+                  <widget class="QLabel" name="u_label">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="text">
+                    <string>User</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>u_r</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="u_r">
+                   <property name="text">
+                    <string>Read</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="u_w">
+                   <property name="text">
+                    <string>Write</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="u_x">
+                   <property name="text">
+                    <string>Exec</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="g_group" stretch="1,0,0,0">
+                 <item>
+                  <widget class="QLabel" name="g_label">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="text">
+                    <string>Group</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>g_r</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="g_r">
+                   <property name="text">
+                    <string>Read</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="g_w">
+                   <property name="text">
+                    <string>Write</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="g_x">
+                   <property name="text">
+                    <string>Exec</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="o_group" stretch="1,0,0,0">
+                 <item>
+                  <widget class="QLabel" name="o_label">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Select your template below</string>
+                   </property>
+                   <property name="text">
+                    <string>Others</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>o_r</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="o_r">
+                   <property name="text">
+                    <string>Read</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="o_w">
+                   <property name="text">
+                    <string>Write</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="o_x">
+                   <property name="text">
+                    <string>Exec</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="sxg_group">
+               <item>
+                <widget class="QCheckBox" name="u_s">
+                 <property name="text">
+                  <string>SetUID</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="g_s">
+                 <property name="text">
+                  <string>SetGID</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="a_s">
+                 <property name="text">
+                  <string>Sticky</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="toolTip">
+      <string>Confirm or Abort changes.</string>
+     </property>
+     <property name="whatsThis">
+      <string>Click 'OK' to create the new Project Item or 'Cancel' to abort and lose all selections in this box.Click 'OK' to create the new Project Item or 'Cancel' to abort and lose all selections in this box.</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>template_group</tabstop>
+  <tabstop>templateList</tabstop>
+  <tabstop>initialContents</tabstop>
+  <tabstop>itemDisplay</tabstop>
+  <tabstop>itemName</tabstop>
+  <tabstop>openAfterCreated</tabstop>
+  <tabstop>u_r</tabstop>
+  <tabstop>u_w</tabstop>
+  <tabstop>u_x</tabstop>
+  <tabstop>u_s</tabstop>
+  <tabstop>g_r</tabstop>
+  <tabstop>g_w</tabstop>
+  <tabstop>g_x</tabstop>
+  <tabstop>g_s</tabstop>
+  <tabstop>o_r</tabstop>
+  <tabstop>o_w</tabstop>
+  <tabstop>o_x</tabstop>
+  <tabstop>a_s</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>222</x>
+     <y>553</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>290</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u_r</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>823</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u_w</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>496</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>677</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u_x</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>561</x>
+     <y>444</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>683</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u_s</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>609</x>
+     <y>446</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>747</x>
+     <y>448</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>g_r</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>476</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>438</x>
+     <y>674</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>g_w</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>516</x>
+     <y>476</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>508</x>
+     <y>689</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>g_x</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>473</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>573</x>
+     <y>663</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>g_s</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>623</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>625</x>
+     <y>668</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>o_r</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>467</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>450</x>
+     <y>662</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>o_w</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>635</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>o_x</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>577</x>
+     <y>511</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>715</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>a_s</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetFilePermissions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>638</x>
+     <y>507</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>637</x>
+     <y>700</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>itemDisplay</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetDialogItemStatuses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>635</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>781</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>itemName</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetDialogItemStatuses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>810</x>
+     <y>412</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>itemName</sender>
+   <signal>urlSelected(KUrl)</signal>
+   <receiver>GxInsertNewProjectItemDialog</receiver>
+   <slot>SetDialogItemStatuses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>55</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>38</x>
+     <y>676</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>template_group</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>initialContents</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>517</x>
+     <y>146</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>templateList</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>initialContents</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SetFilePermissions()</slot>
+  <slot>SetDialogItemStatuses()</slot>
+ </slots>
+</ui>

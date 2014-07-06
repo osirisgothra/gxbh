@@ -1,15 +1,19 @@
+#include "GxApplication.h"
+#include "GxProjectItem.h"
+#include "GxProjectTree.h"
 #include "GxMainWindow.h"
 #include <qtermwidget.h>
 #include "ui_GxMainWindow.h"
 #include <QtGui>
 #include <QtCore>
-#include "GxProjectItem.h"
-#include "GxProjectTree.h"
 #include <KDE/KTextEdit>
 #include <KDE/KMainWindow>
 #include <KDE/KApplication>
 #include <KDE/KHelpMenu>
 #include <boost/cast.hpp>
+#include <QMap>
+#include <QDockWidget>
+#include "GxSyntaxHighlighter.h"
 
 
 GxMainWindow::GxMainWindow(QWidget *parent) :
@@ -20,6 +24,24 @@ GxMainWindow::GxMainWindow(QWidget *parent) :
 
     connect(ui->term,SIGNAL(finished()),this,SLOT(onTermFinished()));
     connect(ui->actionNew_Project,SIGNAL(triggered()),this,SLOT(onActionnewProjectTriggered()));
+
+    // depending on the user's preference (kde settings that is)
+    // will set click preferences to this, since it is the one mouse
+    // behavior that does not happen automatically (like focus, hover, etc)
+    // if its not present it will fail back to double-click navigation mode
+    if (GxApplication::instance()->config->singleClick())
+    {
+        qDebug() << "Using Single-Click Navigation Mode";
+        connect(ui->projtree,SIGNAL(clicked(QModelIndex)),this,SLOT(onProjtreeDoubleclicked(QModelIndex)));
+    }
+    else
+    {
+        qDebug() << "Using Double-Click Navigation Mode";
+        connect(ui->projtree,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(onProjtreeDoubleclicked(QModelIndex)));
+    }
+
+    ui->syntaxDock->setFloating(false);
+    tabifyDockWidget(ui->projectsDock,ui->syntaxDock);
 
 }
 
@@ -36,21 +58,14 @@ void GxMainWindow::onExecPressed()
 
 void GxMainWindow::onActionaddNewItemTriggered()
 {
-    bool pressed = false;
-    QString docname = QInputDialog::getText(this,
-                                            "Specify Filename",
-                                            "Please enter a file name for this document, it will be used to identify it within the project, and when saving the document later. Make sure to include the desired extension (ie, file.txt):",
-                                            QLineEdit::Normal,
-                                            "Untitled" + QString::number(open_documents.count()+1),&pressed
-                                           );
-    if (pressed)
-    {        
-        //TODO:
-        // SelectedProject->AddSubItem (if no selected)
-        // OR
-        // SelectedItem->AddSubItem
-        //
+    if (ui->projtree->selectedProject() >= 0)
+    {
+        bool pressed = false;
 
+        if (pressed)
+        {
+
+        }
     }
 
 }
@@ -126,4 +141,16 @@ void GxMainWindow::onActionCloseTriggered()
             delete win;
         }
     }
+}
+
+void GxMainWindow::on_sh_apply_clicked()
+{
+    if (ui->mdiArea->activeSubWindow() != NULL)
+    {
+        KTextEdit* win = boost::polymorphic_cast<KTextEdit*,QMdiSubWindow>(ui->mdiArea->activeSubWindow());
+        GxSyntaxHighlighter* highlighter = win->document()->findChild<GxSyntaxHighlighter*>();
+
+
+    }
+
 }

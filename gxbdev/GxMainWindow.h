@@ -32,6 +32,8 @@ private slots:
 
     void onActionCloseTriggered();
 
+    void on_sh_apply_clicked();
+
 private:
     QList<QTextDocument*> open_documents;
 

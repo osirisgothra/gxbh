@@ -41,6 +41,7 @@ int GxProjectTree::addProject()
     if (true)// (w->exec() == QDialog::Accepted)
     {
 
+
         GxProjectItem* newitem = new GxProjectItem(w->projectDispname);
 
         newitem->setParent(this);

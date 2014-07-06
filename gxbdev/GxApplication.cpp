@@ -4,8 +4,25 @@
 #include <KDE/KCmdLineArgs>
 #include <KDE/KMessageBox>
 #include <KDE/KAboutData>
+#include <boost/cast.hpp>
 
 KAboutData* aboutData;
+
+GxApplication::GxApplication():
+    KApplication(),
+    config(new GxConfigManagement(0))
+{}
+
+const GxApplication *GxApplication::instance()
+{
+    return boost::polymorphic_cast<GxApplication*,QCoreApplication>(KApplication::instance());
+}
+
+const KAboutData *GxApplication::aboutData()
+{
+    return ::aboutData; // the data sitting on the global namespace is just above the constructor
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +32,7 @@ int main(int argc, char *argv[])
                 "gxbase",
                 "gxbase",
                 ki18n("gxbdev"),
-                "0.2.0.0",
+                "0.2.0.1",
                 ki18n("GxBase Development IDE"),
           KAboutData::License_GPL_V2,
                 ki18n("(C)2014 Paradisim Enterprises, LLC"),
@@ -27,7 +44,8 @@ int main(int argc, char *argv[])
 
 
     KCmdLineArgs::init(argc,argv,&aboutData);
-    KCmdLineOptions options;        options.add("version",ki18n("Report version and exit"));
+
+    KCmdLineOptions options;        options.add("appversion",ki18n("Report Application-specific version info and exit"));
     KCmdLineArgs::addCmdLineOptions(options);
     GxApplication app; // Our documentation says to put these items here.
     GxMainWindow* w = new GxMainWindow(0);    // <-------/ and the session manager will delete this
@@ -39,9 +57,9 @@ int main(int argc, char *argv[])
     pal.setColor(QPalette::Text,Qt::gray);
     app.setPalette(pal);
 
-    if (args->isSet("version"))
+    if (args->isSet("appversion"))
     {
-        KMessageBox::information(0,"gxbdev 0.2.0.0 (pre-release)","Version");
+        KMessageBox::information(0,"gxbdev 0.2.0.1 (pre-release)","Version");
         return 0;
     }
 
@@ -52,3 +70,4 @@ int main(int argc, char *argv[])
 
 
 }
+

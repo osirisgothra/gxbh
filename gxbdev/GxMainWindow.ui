@@ -184,7 +184,7 @@
    <addaction name="actionAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="QDockWidget" name="projectsDock">
    <property name="floating">
     <bool>false</bool>
    </property>
@@ -279,7 +279,7 @@ color: rgb(213, 213, 213);</string>
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockWidget_2">
+  <widget class="QDockWidget" name="syntaxDock">
    <property name="minimumSize">
     <size>
      <width>260</width>

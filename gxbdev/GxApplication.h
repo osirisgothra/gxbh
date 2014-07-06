@@ -2,11 +2,17 @@
 #define GXAPPLICATION_H
 
 #include <KDE/KApplication>
+#include "GxConfigManagement.h"
+
 
 class GxApplication : public KApplication
 {
 public:
-    GxApplication():KApplication() {}
+    const GxConfigManagement* config;
+    GxApplication();
+
+    static const GxApplication* instance();
+    static const KAboutData* aboutData();
 };
 
 #endif // GXAPPLICATION_H

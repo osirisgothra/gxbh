@@ -32,6 +32,8 @@ private:
     QTextCharFormat builtinsFormat;
     QTextCharFormat numericFormat;
 
+    QList<QTextCharFormat> userRules;
+
 };
 
 #endif // GXSYNTAXHIGHLIGHTER_H
