@@ -1,4 +1,5 @@
 #ifndef GXAPPLICATION_H
+
 #define GXAPPLICATION_H
 
 #include <KDE/KApplication>

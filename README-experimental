@@ -24,4 +24,12 @@ is 'free as long as it is worthless'.
 Development here has been deemed more of a sandbox than working integration parts, and because of that, I will
 not be using most of it for gxbase's defaults and if I do, may become a separate project which will cause it 
 to become a dependency. It is here now still because they are not complete, and I want it to be available in
-case someone decides it is useful to complete it at some point, especially myself and forkers.
+case someone (or myself) decides it is useful to complete it at some point, especially myself and forkers.
+
+2015
+----
+Version/branch labeling changes to my global way of versioning my projects: 
+   
+   [version major.minor].[1-2 digit month].[2-digit year]
+
+
