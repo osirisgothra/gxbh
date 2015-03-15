@@ -9,7 +9,7 @@ using System.Collections.Generic;
  Author:
       Gabriel T. Sharp <osirisgothra@hotmail.com>
 
- Copyright (c) 2013 Paradisim Enterprises, LLC <paradisim.tk>
+ Copyright (c) 2013-2015 Paradisim Enterprises, LLC
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

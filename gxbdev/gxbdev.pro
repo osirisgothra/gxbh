@@ -25,7 +25,8 @@ SOURCES +=\
     GxApplication.cpp \
     GxPimpl.cpp \
     GxConfigManagement.cpp \
-    GxInsertNewProjectItemDialog.cpp
+    GxInsertNewProjectItemDialog.cpp \
+    GxWebView.cpp
 
 HEADERS  += GxMainWindow.h \
     GxEditorWindow.h \
@@ -36,9 +37,11 @@ HEADERS  += GxMainWindow.h \
     GxSyntaxHighlighter.h \
     GxApplication.h \
     GxConfigManagement.h \
-    GxInsertNewProjectItemDialog.h
+    GxInsertNewProjectItemDialog.h \
+    GxWebView.h
 
 FORMS    += GxMainWindow.ui \
     GxCreateProjectWindow.ui \
-    GxInsertNewProjectItemDialog.ui
+    GxInsertNewProjectItemDialog.ui \
+    GxWebView.ui
 
